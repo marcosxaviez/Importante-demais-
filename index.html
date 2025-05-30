@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Importante Demais</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #b30000;
+            color: white;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        h1 {
+            margin-bottom: 40px;
+            font-size: 42px;
+        }
+        button {
+            padding: 20px 40px;
+            margin: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #b30000;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+        button:hover {
+            background-color: #ff9999;
+            color: #660000;
+        }
+        #mensagem {
+            margin-top: 30px;
+            font-size: 60px;
+            display: none;
+        }
+        #chance {
+            margin-top: 20px;
+            font-size: 32px;
+            display: none;
+            color: #fff700;
+        }
+        .efeito {
+            position: fixed;
+            top: -50px;
+            font-size: 40px;
+            animation: cair 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes cair {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="conteudo">
+        <h1>Vida, amorzinho hoje ? 😈❤️‍🔥</h1>
+        <button onclick="mostrarAmor()">Sim</button>
+        <button id="btnNao" onclick="tentarNovamente()">Não</button>
+        <div id="chance">Você tem mais uma chance… 😏</div>
+    </div>
+
+    <div id="mensagem">Ebaaaaa, te amo te amo ❤️‍🔥</div>
+
+    <script>
+        function mostrarAmor() {
+            document.getElementById("conteudo").style.display = "none";
+            document.getElementById("mensagem").style.display = "block";
+
+            for (let i = 0; i < 50; i++) {
+                let efeito = document.createElement("div");
+                efeito.classList.add("efeito");
+                efeito.style.left = Math.random() * 100 + "vw";
+                efeito.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                efeito.innerHTML = Math.random() < 0.5 ? "❤️" : "🔥";
+                document.body.appendChild(efeito);
+
+                setTimeout(() => {
+                    efeito.remove();
+                }, 5000);
+            }
+        }
+
+        function tentarNovamente() {
+            let btnNao = document.getElementById("btnNao");
+            let chance = document.getElementById("chance");
+
+            // Mostra a mensagem de chance
+            chance.style.display = "block";
+
+            // Move o botão pra outro lugar
+            let maxX = window.innerWidth - btnNao.offsetWidth;
+            let maxY = window.innerHeight - btnNao.offsetHeight;
+
+            let randomX = Math.random() * maxX;
+            let randomY = Math.random() * maxY;
+
+            btnNao.style.position = "fixed";
+            btnNao.style.left = randomX + "px";
+            btnNao.style.top = randomY + "px";
+        }
+    </script>
+</body>
+</html>
